@@ -45,8 +45,8 @@ public class PersonController implements CommonController<Person> {
 		
 		try {
 			personService.delete(id);
-			map.setState(200);
 			map.setMessage("success");
+			map.setState(200);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			map.setState(505);
