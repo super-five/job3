@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--命名空间应该是对应接口的包名+接口名 -->
+<mapper namespace="com.example.demo.mapper.PersonDao">
+	<!-- public int add(T t); -->
+	<insert id="add" parameterType="com.example.demo.pojo.Person">
+		insert into person(
+			name,
+			vxnumber,
+			phoneNumber,
+			idcard,
+			password,
+			state)
+		values(
+			#{name},
+			#{vxnumber},
+			#{phoneNumber},
+			#{idcard},
+			#{password},
+			#{state}
+		)
+	</insert>
+
+	<!-- public int delete(int i); -->
+	<update id="delete" parameterType="com.example.demo.pojo.Person">
+		update person set state=-1
+		where id=#{id}
+	</update>
+
+	<!-- public int update(T t); -->
+	<update id="update" parameterType="int">
+		update person set
+			name =#{name},
+			vxnumber=#{vxnumber},
+			phoneNumber=#{phoneNumber},
+			idcard=#{idcard},
+			password=#{password},
+			state=#{state}
+		where id=#{id}
+	</update>
+
+	<!-- public List<T> getList(); -->
+	<select id="getList" resultType="com.example.demo.pojo.Person">
+		select * from person
+	</select>
+
+	<!-- public int getCount(); -->
+	<select id="getCount" resultType="int">
+		select count(*) from person
+	</select>
+	
+	<!--//1:通过手机号获取用户信息
+	public Person getPerson(Person person);-->
+	<select id="getPerson" parameterType= "string" resultType="com.example.demo.pojo.Person">
+		select name, vxnumber, phoneNumber, idcard, password, state 
+		from person where phoneNumber = #{phoneNumber}
+	</select>
+	
+</mapper>

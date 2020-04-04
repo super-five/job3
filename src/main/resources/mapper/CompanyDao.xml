@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CompanyDao">
+	<!-- public int add(T t); -->
+	<insert id="add" parameterType="com.example.demo.pojo.Company">
+		insert into company(
+			name,
+			post,
+			nature,
+			industry,
+			address,
+			conditions,
+			welfare,
+			scale,
+			salary,
+			img,
+			updatetime,
+			description,
+			state)
+		values(
+			#{name},
+			#{post},
+			#{nature},
+			#{industry},
+			#{address},
+			#{conditions},
+			#{welfare},
+			#{scale},
+			#{salary},
+			#{img},
+			#{updateTime},
+			#{description},
+			1
+		)
+	</insert>
+
+	<!-- public int delete(int i); -->
+	<update id="delete" parameterType="com.example.demo.pojo.Company">
+		update company set state=-1 where id=#{id}
+	</update>
+
+	<!-- public int update(T t); -->
+	<update id="update" parameterType="int">
+		update company set
+			name = #{name},
+			post= #{post},
+			nature= #{nature},
+			industry= #{industry},
+			address= #{address},
+			conditions= #{conditions},
+			welfare= #{welfare},
+			scale= #{scale},
+			salary= #{salary},
+			img= #{img},
+			updateTime= #{updateTime},
+			#{description},
+			state= #{state} 
+		where id=#{id}
+	</update>
+	
+	<!-- public List<T> getList(); -->
+	<select id="getList" resultType="com.example.demo.pojo.Company">
+		select * from company
+	</select>
+	
+	<!-- public int getCount(); -->
+	<select id="getCount" resultType="int">
+		select count(*) from company
+	</select>
+
+</mapper>
